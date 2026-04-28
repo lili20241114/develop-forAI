@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心智障碍者工作现场支持体系</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        purple: '#8B5CF6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .feature-card {
+                @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .feature-icon {
+                @apply w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-md font-bold transition-all duration-300;
+            }
+            .btn-secondary {
+                @apply bg-white hover:bg-gray-100 text-primary border border-primary px-6 py-3 rounded-md font-bold transition-all duration-300;
+            }
+            .system-card {
+                @apply bg-white rounded-lg shadow-md overflow-hidden;
+            }
+            .system-card-header {
+                @apply bg-primary text-white p-4 font-bold text-lg;
+            }
+            .system-card-body {
+                @apply p-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fa fa-users text-primary text-2xl mr-3"></i>
+                    <h1 class="text-xl font-bold text-dark">心智障碍者工作现场支持体系</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#overview" class="text-gray-600 hover:text-primary">概述</a>
+                    <a href="#system" class="text-gray-600 hover:text-primary">支持体系</a>
+                    <a href="#resources" class="text-gray-600 hover:text-primary">资源中心</a>
+                    <a href="training-support.html" class="text-gray-600 hover:text-primary">培训支持</a>
+                    <a href="case-studies.html" class="text-gray-600 hover:text-primary">案例研究</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-primary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">心智障碍者工作现场支持体系</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">为心智障碍者提供全面的工作支持，包括工作流程拆解、沟通辅助、环境适应等核心功能，帮助他们更好地适应工作环境，提高工作效率和质量。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#system" class="btn-primary flex items-center justify-center">
+                    <i class="fa fa-sitemap mr-2"></i>了解支持体系
+                </a>
+                <a href="#resources" class="btn-secondary flex items-center justify-center">
+                    <i class="fa fa-book mr-2"></i>访问资源中心
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 概述 -->
+    <section id="overview" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">支持体系概述</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">什么是心智障碍者工作现场支持体系？</h3>
+                    <p class="text-gray-600 mb-4">心智障碍者工作现场支持体系是一个综合性的工具和方案集合，旨在帮助心智障碍者（包括孤独症谱系障碍、智力发育迟缓、唐氏综合征、脑瘫伴随智力障碍等）更好地适应工作环境，提高工作效率和质量。</p>
+                    <p class="text-gray-600">该体系覆盖工作流程拆解、沟通辅助、环境适应三大核心需求，按岗位分类设计，兼顾不同能力层级，并提供低成本与数字化两套方案，适应不同资源条件的工作场所。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa fa-check-circle text-primary mr-2"></i>核心目标
+                        </h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>帮助心智障碍者理解和执行工作任务</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>减少沟通障碍，促进有效交流</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>创造友好的工作环境</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>提高工作效率和质量</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>促进社会融合和独立生活能力</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fa fa-users text-primary mr-2"></i>目标用户
+                        </h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>心智障碍者</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>工作场所的管理者</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>工作场所的支持人员</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>职业康复师</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-angle-right text-primary mt-1 mr-2"></i>
+                                <span>特殊教育工作者</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持体系 -->
+    <section id="system" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">完整支持体系</h2>
+            
+            <!-- 核心模块 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- 工作流程拆解 -->
+                <div class="system-card">
+                    <div class="system-card-header bg-primary">
+                        <i class="fa fa-list-ol mr-2"></i>工作流程拆解
+                    </div>
+                    <div class="system-card-body">
+                        <p class="text-gray-600 mb-4">将复杂工作任务分解为可理解的步骤，帮助心智障碍者逐步完成工作。</p>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                                <span>工作流程拆解模板</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                                <span>标准化工作流程示例</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                                <span>视觉提示系统</span>
+                            </li>
+                        </ul>
+                        <a href="workflow-template.html" class="text-primary hover:underline flex items-center">
+                            <span>查看详情</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 沟通辅助 -->
+                <div class="system-card">
+                    <div class="system-card-header bg-secondary">
+                        <i class="fa fa-comments mr-2"></i>沟通辅助
+                    </div>
+                    <div class="system-card-body">
+                        <p class="text-gray-600 mb-4">提供多维度的沟通支持，帮助心智障碍者更好地表达和交流。</p>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>视觉化沟通卡片</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>数字化沟通应用</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>标准化沟通模板</span>
+                            </li>
+                        </ul>
+                        <a href="communication-tool.html" class="text-secondary hover:underline flex items-center">
+                            <span>查看详情</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 环境适应 -->
+                <div class="system-card">
+                    <div class="system-card-header bg-warning">
+                        <i class="fa fa-paint-brush mr-2"></i>环境适应
+                    </div>
+                    <div class="system-card-body">
+                        <p class="text-gray-600 mb-4">创造友好的工作环境，减少环境因素对心智障碍者的干扰。</p>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-danger mt-1 mr-2"></i>
+                                <span>物理环境调整建议</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-danger mt-1 mr-2"></i>
+                                <span>心理环境适应策略</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-danger mt-1 mr-2"></i>
+                                <span>环境评估工具</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-warning hover:underline flex items-center">
+                            <span>查看详情</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 辅助模块 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 岗位分类 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-primary">
+                        <i class="fa fa-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">岗位分类支持</h3>
+                    <p class="text-gray-600 mb-4">为不同岗位提供定制化的支持方案，帮助工作场所为心智障碍者选择合适岗位。</p>
+                    <a href="job-classification.html" class="text-primary hover:underline">查看详情</a>
+                </div>
+                
+                <!-- 能力层级 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-secondary">
+                        <i class="fa fa-tasks"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">能力层级适配</h3>
+                    <p class="text-gray-600 mb-4">根据心智障碍者的能力水平提供相应的支持强度和方式，确保方案的针对性。</p>
+                    <a href="ability-level-adaptation-system.html" class="text-secondary hover:underline">查看详情</a>
+                </div>
+                
+                <!-- 低成本方案 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-warning">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">低成本方案</h3>
+                    <p class="text-gray-600 mb-4">使用常见、易获取的材料制作支持工具，适合资源有限的工作场所。</p>
+                    <a href="low-cost-solution.html" class="text-warning hover:underline">查看详情</a>
+                </div>
+                
+                <!-- 数字化方案 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-danger">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">数字化方案</h3>
+                    <p class="text-gray-600 mb-4">利用移动应用、平板等设备提供更丰富的支持功能，如步骤提醒、视觉辅助等。</p>
+                    <a href="digital-solution.html" class="text-danger hover:underline">查看详情</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资源中心 -->
+    <section id="resources" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">资源中心</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 使用指南 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-primary flex items-center">
+                        <i class="fa fa-book mr-2"></i>使用指南
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-file-pdf-o text-danger mt-1 mr-3"></i>
+                            <div>
+                                <strong>工作流程拆解工具使用指南</strong>
+                                <p class="text-gray-600">详细介绍如何使用工作流程拆解工具，包括模板使用、步骤定制等内容。</p>
+                                <a href="#" class="text-primary hover:underline mt-2 inline-block">下载 PDF</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-file-pdf-o text-danger mt-1 mr-3"></i>
+                            <div>
+                                <strong>沟通辅助工具使用指南</strong>
+                                <p class="text-gray-600">介绍如何使用视觉化沟通卡片和数字化沟通应用，提高沟通效果。</p>
+                                <a href="#" class="text-primary hover:underline mt-2 inline-block">下载 PDF</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-file-pdf-o text-danger mt-1 mr-3"></i>
+                            <div>
+                                <strong>环境适应方案实施指南</strong>
+                                <p class="text-gray-600">提供环境评估和调整的具体步骤，帮助工作场所创造友好的工作环境。</p>
+                                <a href="#" class="text-primary hover:underline mt-2 inline-block">下载 PDF</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 培训材料 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold mb-4 text-secondary flex items-center">
+                        <i class="fa fa-graduation-cap mr-2"></i>培训材料
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-file-powerpoint-o text-warning mt-1 mr-3"></i>
+                            <div>
+                                <strong>工作场所支持人员培训课件</strong>
+                                <p class="text-gray-600">为工作场所的支持人员提供培训，包括心智障碍基础知识、支持策略等内容。</p>
+                                <a href="#" class="text-secondary hover:underline mt-2 inline-block">下载 PPT</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-file-powerpoint-o text-warning mt-1 mr-3"></i>
+                            <div>
+                                <strong>管理者培训课件</strong>
+                                <p class="text-gray-600">为工作场所管理者提供培训，包括如何为心智障碍者提供支持、如何创建包容性工作环境等内容。</p>
+                                <a href="#" class="text-secondary hover:underline mt-2 inline-block">下载 PPT</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-video-camera text-purple mt-1 mr-3"></i>
+                            <div>
+                                <strong>工具使用视频教程</strong>
+                                <p class="text-gray-600">通过视频演示如何使用各种支持工具，帮助用户快速掌握使用方法。</p>
+                                <a href="#" class="text-secondary hover:underline mt-2 inline-block">查看视频</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 培训和支持机制 -->
+    <section id="training" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">培训和支持机制</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 培训计划 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-primary">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">培训计划</h3>
+                    <p class="text-gray-600 mb-4">为工作场所提供系统化的培训，帮助他们掌握支持心智障碍者的知识和技能。</p>
+                    <ul class="space-y-2 text-gray-600 mb-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                            <span>基础培训：心智障碍基础知识</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                            <span>进阶培训：工具使用和支持策略</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                            <span>定制培训：根据具体岗位需求</span>
+                        </li>
+                    </ul>
+                    <a href="training-support.html" class="text-primary hover:underline">了解更多</a>
+                </div>
+                
+                <!-- 技术支持 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-secondary">
+                        <i class="fa fa-headphones"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">技术支持</h3>
+                    <p class="text-gray-600 mb-4">为工作场所提供持续的技术支持，确保工具的有效使用和问题的及时解决。</p>
+                    <ul class="space-y-2 text-gray-600 mb-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                            <span>在线咨询：工作日 9:00-18:00</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                            <span>电话支持：400-123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-secondary mt-1 mr-2"></i>
+                            <span>邮件支持：support@example.com</span>
+                        </li>
+                    </ul>
+                    <a href="training-support.html" class="text-secondary hover:underline">联系我们</a>
+                </div>
+                
+                <!-- 持续优化 -->
+                <div class="feature-card">
+                    <div class="feature-icon bg-warning">
+                        <i class="fa fa-refresh"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">持续优化</h3>
+                    <p class="text-gray-600 mb-4">通过反馈收集和数据分析，持续优化支持工具和方案，确保其有效性和适用性。</p>
+                    <ul class="space-y-2 text-gray-600 mb-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-warning mt-1 mr-2"></i>
+                            <span>定期反馈收集</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-warning mt-1 mr-2"></i>
+                            <span>工具更新和改进</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-warning mt-1 mr-2"></i>
+                            <span>最佳实践分享</span>
+                        </li>
+                    </ul>
+                    <a href="training-support.html" class="text-warning hover:underline">参与优化</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例研究 -->
+    <section id="case-studies" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">案例研究</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 案例1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 bg-primary flex items-center justify-center">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=workplace%20for%20people%20with%20intellectual%20disabilities%20inclusive%20environment&image_size=landscape_4_3" alt="案例研究1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">某电子厂包装岗位支持案例</h3>
+                        <p class="text-gray-600 mb-4">通过实施工作流程拆解工具和沟通辅助工具，某电子厂成功为3名孤独症员工提供了有效的工作支持，提高了工作效率和质量。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2026年3月</span>
+                            <i class="fa fa-user mr-2 ml-4"></i>
+                            <span>电子制造业</span>
+                        </div>
+                        <a href="#" class="text-primary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="h-48 bg-secondary flex items-center justify-center">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=supermarket%20workplace%20with%20people%20with%20disabilities%20working%20together&image_size=landscape_4_3" alt="案例研究2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">某超市整理岗位支持案例</h3>
+                        <p class="text-gray-600 mb-4">某超市通过使用环境适应方案和能力层级适配系统，为2名智力发育迟缓员工创造了适宜的工作环境，提高了他们的工作满意度。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2026年2月</span>
+                            <i class="fa fa-user mr-2 ml-4"></i>
+                            <span>零售业</span>
+                        </div>
+                        <a href="#" class="text-secondary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">需要帮助？联系我们</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">如果您有任何问题或需要支持，欢迎联系我们的团队，我们将为您提供专业的指导和帮助。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-envelope mr-2"></i>发送邮件
+                </a>
+                <a href="#" class="bg-transparent border border-white text-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-phone mr-2"></i>电话咨询
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fa fa-users text-primary text-2xl mr-3"></i>
+                        <h2 class="text-xl font-bold">心智障碍者工作现场支持体系</h2>
+                    </div>
+                    <p class="text-gray-400 mt-2">为心智障碍者提供全面的工作支持</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-home text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-question-circle text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-envelope text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-share-alt text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; 2026 心智障碍者工作现场支持体系 - 为心智障碍者提供工作支持</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

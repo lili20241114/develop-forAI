@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>低成本方案 - 心智障碍就业支持工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        purple: '#8B5CF6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937',
+                        red: '#EF4444',
+                        yellow: '#F59E0B',
+                        green: '#10B981'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .cost-card {
+                @apply bg-white rounded-xl shadow-md p-6 border-l-4;
+            }
+            .material-item {
+                @apply flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-3;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex items-center mr-3">
+                        <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-green rounded-full"></span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-dark">心智障碍就业支持工具</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary">首页</a>
+                    <a href="low-cost-solution.html" class="text-primary font-bold">低成本方案</a>
+                    <a href="digital-solution.html" class="text-gray-600 hover:text-primary">数字化方案</a>
+                    <a href="job-classification.html" class="text-gray-600 hover:text-primary">岗位方案</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-r from-green-500 to-green-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold mb-4">低成本纸质方案</h1>
+            <p class="text-lg">使用常见材料制作的工作流程卡片和海报，适合资源有限的工作场所，成本仅100-200元/人</p>
+        </div>
+    </section>
+
+    <!-- 方案概述 -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="flex items-center mb-6">
+                        <i class="fa fa-info-circle text-green-500 text-3xl mr-4"></i>
+                        <div>
+                            <h2 class="text-xl font-bold">方案概述</h2>
+                            <p class="text-gray-600">低成本方案采用打印塑封的纸质材料，无需电子设备支持，可立即实施</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-4">
+                            <h3 class="font-bold text-green-700 mb-2 flex items-center">
+                                <i class="fa fa-plus-circle mr-2"></i>优势
+                            </h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• 成本低（100-200元/人）</li>
+                                <li>• 可立即实施</li>
+                                <li>• 无需培训</li>
+                                <li>• 无需设备维护</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-4">
+                            <h3 class="font-bold text-red-700 mb-2 flex items-center">
+                                <i class="fa fa-minus-circle mr-2"></i>局限
+                            </h3>
+                            <ul class="space-y-2 text-gray-600">
+                                <li>• 更新需重新打印</li>
+                                <li>• 无法自动记录数据</li>
+                                <li>• 依赖物理存储空间</li>
+                                <li>• 无法远程支持</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 材料清单 -->
+    <section class="py-12 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">材料清单与成本估算</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-3">
+                    <div class="material-item">
+                        <div class="flex items-center">
+                            <i class="fa fa-file-text-o text-primary mr-3"></i>
+                            <div>
+                                <strong>任务卡</strong>
+                                <p class="text-sm text-gray-500">打印+塑封，A5尺寸</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600">5-10元/张</span>
+                    </div>
+                    
+                    <div class="material-item">
+                        <div class="flex items-center">
+                            <i class="fa fa-comments text-purple-500 mr-3"></i>
+                            <div>
+                                <strong>沟通需求卡</strong>
+                                <p class="text-sm text-gray-500">打印+塑封+打孔，含挂绳</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600">20-50元/套</span>
+                    </div>
+                    
+                    <div class="material-item">
+                        <div class="flex items-center">
+                            <i class="fa fa-thumbtack text-yellow-500 mr-3"></i>
+                            <div>
+                                <strong>颜色磁钉板</strong>
+                                <p class="text-sm text-gray-500">白板+彩色磁钉</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600">15-30元/个</span>
+                    </div>
+                    
+                    <div class="material-item">
+                        <div class="flex items-center">
+                            <i class="fa fa-clock-o text-blue-500 mr-3"></i>
+                            <div>
+                                <strong>实体定时器（Time Timer）</strong>
+                                <p class="text-sm text-gray-500">5/15/25分钟可选</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600">30-50元/个</span>
+                    </div>
+                    
+                    <div class="material-item">
+                        <div class="flex items-center">
+                            <i class="fa fa-calendar text-red-500 mr-3"></i>
+                            <div>
+                                <strong>日常时刻表</strong>
+                                <p class="text-sm text-gray-500">打印+塑封，A4尺寸</p>
+                            </div>
+                        </div>
+                        <span class="font-bold text-green-600">5-10元/张</span>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-bold">合计（基础配置）</span>
+                        <span class="text-2xl font-bold text-green-600">100-200元/人</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 制作步骤 -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">制作步骤</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg">设计任务卡内容</h4>
+                                <p class="text-gray-600 mt-2">根据岗位需求，使用方案中提供的任务卡模板，填写任务名称、步骤说明和注意事项。建议每卡包含3-5个步骤，使用简单易懂的语言和图标。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg">打印与塑封</h4>
+                                <p class="text-gray-600 mt-2">使用A5纸张打印任务卡，然后进行塑封处理。塑封可以保护卡片，防止污损，延长使用寿命。建议使用圆角裁剪，避免尖角划伤。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-warning text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">3</div>
+                            <div>
+                                <h4 class="font-bold text-lg">准备辅助材料</h4>
+                                <p class="text-gray-600 mt-2">准备白板、彩色磁钉、实体定时器等辅助材料。将磁钉按颜色分类（红-黄-绿），便于进度追踪使用。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">4</div>
+                            <div>
+                                <h4 class="font-bold text-lg">培训与使用</h4>
+                                <p class="text-gray-600 mt-2">对心智障碍员工进行简单培训，演示如何使用任务卡和进度追踪工具。就业辅导员在初期提供密集支持，逐步减少干预。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 模板下载 -->
+    <section class="py-12 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">可下载模板</h2>
+            <div class="max-w-2xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition-shadow">
+                        <i class="fa fa-file-text-o text-primary text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold">任务卡模板</h3>
+                            <p class="text-gray-600 text-sm">PDF格式，A5尺寸</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition-shadow">
+                        <i class="fa fa-calendar text-secondary text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold">日常时刻表</h3>
+                            <p class="text-gray-600 text-sm">PDF格式，A4尺寸</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition-shadow">
+                        <i class="fa fa-comments text-purple-500 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold">沟通需求卡</h3>
+                            <p class="text-gray-600 text-sm">PDF格式，可定制</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="bg-white rounded-xl shadow-md p-6 flex items-center hover:shadow-lg transition-shadow">
+                        <i class="fa fa-tasks text-yellow-500 text-3xl mr-4"></i>
+                        <div>
+                            <h3 class="font-bold">进度追踪表</h3>
+                            <p class="text-gray-600 text-sm">PDF格式，含磁钉板模板</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实施建议 -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-8 text-center">实施建议</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 flex items-center">
+                                <i class="fa fa-lightbulb-o text-yellow-500 mr-2"></i>小贴士
+                            </h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    使用粗体大号字体（24pt以上）提高可读性
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    添加简单图标帮助理解，减少文字依赖
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    使用红-黄-绿颜色编码，保持视觉一致性
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    将任务卡放置在工作台可见位置
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-4 flex items-center">
+                                <i class="fa fa-users text-blue-500 mr-2"></i>团队配合
+                            </h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    培训所有同事了解任务卡系统
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    指定一名同事作为主要支持者
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    定期检查卡片使用情况并更新内容
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    收集反馈，持续改进卡片内容
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                    <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                    <span class="w-3 h-3 bg-green rounded-full"></span>
+                </div>
+            </div>
+            <h2 class="text-xl font-bold mb-2">心智障碍就业支持工具</h2>
+            <p class="text-gray-400">帮助心智障碍者更好地适应工作环境</p>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-gray-400">
+                <p>&copy; 2026 心智障碍就业支持工具</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

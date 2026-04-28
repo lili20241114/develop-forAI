@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标准化工作流程示例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .step-card {
+                @apply bg-white rounded-lg shadow-md p-4 border-l-4 transition-all duration-300 hover:shadow-lg;
+            }
+            .step-number {
+                @apply w-10 h-10 rounded-full flex items-center justify-center font-bold text-white;
+            }
+            .visual-cue {
+                @apply flex items-center justify-center w-12 h-12 rounded-full bg-light;
+            }
+            .job-card {
+                @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg;
+            }
+            .job-card.active {
+                @apply border-2 border-primary;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex items-center mr-3">
+                        <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-green rounded-full"></span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-dark">心智障碍就业支持工具</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary">首页</a>
+                    <a href="workflow-template.html" class="text-gray-600 hover:text-primary">任务卡模板</a>
+                    <a href="workflow-examples.html" class="text-primary font-bold">流程示例</a>
+                    <a href="communication-tool.html" class="text-gray-600 hover:text-primary">沟通辅助</a>
+                    <a href="job-classification.html" class="text-gray-600 hover:text-primary">岗位方案</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- 标题部分 -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold text-dark mb-2">标准化工作流程示例</h1>
+            <p class="text-gray-600">为不同岗位的心智障碍者提供标准化的工作流程指导</p>
+        </header>
+
+        <!-- 岗位选择 -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button class="job-selector job-card active px-6 py-4 text-center" data-job="packaging">
+                <div class="visual-cue mx-auto mb-3">
+                    <i class="fa fa-box text-primary text-xl"></i>
+                </div>
+                <h3 class="font-bold">包装工</h3>
+                <p class="text-sm text-gray-600">商品包装流程</p>
+            </button>
+            <button class="job-selector job-card px-6 py-4 text-center" data-job="cleaning">
+                <div class="visual-cue mx-auto mb-3">
+                    <i class="fa fa-broom text-secondary text-xl"></i>
+                </div>
+                <h3 class="font-bold">清洁工</h3>
+                <p class="text-sm text-gray-600">办公室清洁流程</p>
+            </button>
+            <button class="job-selector job-card px-6 py-4 text-center" data-job="organizing">
+                <div class="visual-cue mx-auto mb-3">
+                    <i class="fa fa-th-large text-warning text-xl"></i>
+                </div>
+                <h3 class="font-bold">整理员</h3>
+                <p class="text-sm text-gray-600">仓库整理流程</p>
+            </button>
+        </div>
+
+        <!-- 工作流程内容 -->
+        <div class="job-workflow" id="packaging-workflow">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-dark flex items-center">
+                        <i class="fa fa-box mr-2 text-primary"></i>包装工工作流程
+                    </h2>
+                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm">基础级</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- 步骤1 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">1</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">准备包装材料</h3>
+                                <p class="text-gray-600 mb-3">检查并准备所需的包装材料，包括盒子、胶带、填充物等。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-check-circle text-secondary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：绿色表示材料准备就绪</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤2 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">2</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">放置商品</h3>
+                                <p class="text-gray-600 mb-3">将商品放入包装盒中，确保放置正确且稳固。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤3 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">3</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">添加填充物</h3>
+                                <p class="text-gray-600 mb-3">在商品周围添加适当的填充物，防止运输过程中损坏。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤4 -->
+                    <div class="step-card border-l-danger">
+                        <div class="flex items-start">
+                            <div class="step-number bg-danger mr-4">4</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">封箱</h3>
+                                <p class="text-gray-600 mb-3">使用胶带将包装盒密封，确保盒子牢固。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤5 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">5</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">贴标签</h3>
+                                <p class="text-gray-600 mb-3">在包装盒上贴上正确的标签，包括地址、重量等信息。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-tag text-warning text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：黄色表示需要注意</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤6 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">6</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">质量检查</h3>
+                                <p class="text-gray-600 mb-3">检查包装是否牢固，标签是否正确，确保符合质量标准。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-search text-warning text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：黄色表示需要检查</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤7 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">7</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">放置成品</h3>
+                                <p class="text-gray-600 mb-3">将包装好的商品放置到指定的区域，等待发货。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-flag-checkered text-danger text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：红色表示完成</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="job-workflow hidden" id="cleaning-workflow">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-dark flex items-center">
+                        <i class="fa fa-broom mr-2 text-secondary"></i>清洁工工作流程
+                    </h2>
+                    <span class="bg-green-100 text-secondary px-3 py-1 rounded-full text-sm">基础级</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- 步骤1 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">1</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">准备清洁工具</h3>
+                                <p class="text-gray-600 mb-3">检查并准备所需的清洁工具，包括扫帚、拖把、抹布、清洁剂等。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-check-circle text-secondary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：绿色表示工具准备就绪</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤2 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">2</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">清扫地面</h3>
+                                <p class="text-gray-600 mb-3">使用扫帚清扫地面，将垃圾扫到一起。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤3 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">3</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">收集垃圾</h3>
+                                <p class="text-gray-600 mb-3">将清扫的垃圾收集到垃圾袋中，并密封。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤4 -->
+                    <div class="step-card border-l-danger">
+                        <div class="flex items-start">
+                            <div class="step-number bg-danger mr-4">4</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">拖地</h3>
+                                <p class="text-gray-600 mb-3">使用拖把和清洁剂拖地，确保地面干净。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤5 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">5</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">擦拭表面</h3>
+                                <p class="text-gray-600 mb-3">使用抹布和清洁剂擦拭桌面、椅子、窗户等表面。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤6 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">6</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">清理垃圾</h3>
+                                <p class="text-gray-600 mb-3">将装满的垃圾袋拿到指定的垃圾收集点。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-trash text-danger text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：红色表示需要处理</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤7 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">7</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">整理工具</h3>
+                                <p class="text-gray-600 mb-3">将清洁工具清洗干净并整理好，放回指定的存放位置。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-flag-checkered text-danger text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：红色表示完成</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="job-workflow hidden" id="organizing-workflow">
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-dark flex items-center">
+                        <i class="fa fa-th-large mr-2 text-warning"></i>整理员工作流程
+                    </h2>
+                    <span class="bg-yellow-100 text-warning px-3 py-1 rounded-full text-sm">进阶级</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- 步骤1 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">1</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">了解整理要求</h3>
+                                <p class="text-gray-600 mb-3">了解仓库的整理要求和物品的分类标准。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-check-circle text-secondary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：绿色表示准备就绪</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤2 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">2</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">分类物品</h3>
+                                <p class="text-gray-600 mb-3">根据分类标准将物品分成不同的类别。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤3 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">3</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">检查物品状态</h3>
+                                <p class="text-gray-600 mb-3">检查物品是否完好，是否有损坏或过期的情况。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-search text-warning text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：黄色表示需要检查</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤4 -->
+                    <div class="step-card border-l-danger">
+                        <div class="flex items-start">
+                            <div class="step-number bg-danger mr-4">4</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">标记物品</h3>
+                                <p class="text-gray-600 mb-3">为物品贴上标签，注明名称、数量、日期等信息。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-tag text-warning text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：黄色表示需要注意</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤5 -->
+                    <div class="step-card border-l-primary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-primary mr-4">5</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">放置物品</h3>
+                                <p class="text-gray-600 mb-3">将物品按照规定的位置和顺序放置到货架上。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-cogs text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在执行</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤6 -->
+                    <div class="step-card border-l-secondary">
+                        <div class="flex items-start">
+                            <div class="step-number bg-secondary mr-4">6</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">记录库存</h3>
+                                <p class="text-gray-600 mb-3">记录物品的库存情况，确保数据准确。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-pencil text-primary text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：蓝色表示正在记录</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                    <span class="text-sm">难度：中等</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤7 -->
+                    <div class="step-card border-l-warning">
+                        <div class="flex items-start">
+                            <div class="step-number bg-warning mr-4">7</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">清理工作区域</h3>
+                                <p class="text-gray-600 mb-3">清理工作区域，确保整洁有序。</p>
+                                <div class="flex items-center mb-3">
+                                    <div class="visual-cue mr-3">
+                                        <i class="fa fa-flag-checkered text-danger text-xl"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500">视觉提示：红色表示完成</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <span class="text-sm">难度：简单</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="flex justify-center space-x-4 mb-8">
+            <button class="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-md flex items-center">
+                <i class="fa fa-print mr-2"></i>打印流程
+            </button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-md flex items-center">
+                <i class="fa fa-download mr-2"></i>下载模板
+            </button>
+            <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-md flex items-center">
+                <i class="fa fa-share-alt mr-2"></i>分享
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 岗位选择功能
+        document.querySelectorAll('.job-selector').forEach(selector => {
+            selector.addEventListener('click', function() {
+                // 移除所有活动状态
+                document.querySelectorAll('.job-selector').forEach(s => s.classList.remove('active'));
+                // 添加当前活动状态
+                this.classList.add('active');
+                
+                // 隐藏所有工作流程
+                document.querySelectorAll('.job-workflow').forEach(workflow => {
+                    workflow.classList.add('hidden');
+                });
+                
+                // 显示选中的工作流程
+                const job = this.getAttribute('data-job');
+                document.getElementById(`${job}-workflow`).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

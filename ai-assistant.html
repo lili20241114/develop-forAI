@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能工作助手 - 心智障碍就业支持工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        purple: '#8B5CF6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .chat-bubble-user {
+                @apply bg-primary text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-xs ml-auto;
+            }
+            .chat-bubble-assistant {
+                @apply bg-gray-200 text-gray-800 rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs;
+            }
+            .status-indicator {
+                @apply w-3 h-3 rounded-full;
+            }
+            .step-card {
+                @apply bg-white rounded-lg shadow-md p-4 border-l-4 transition-all duration-300;
+            }
+            .step-card.active {
+                @apply shadow-lg border-primary scale-[1.02];
+            }
+            .step-card.completed {
+                @apply opacity-60;
+            }
+            #voice-indicator.active {
+                color: #10B981;
+            }
+            #voice-indicator.active i {
+                animation: pulse 1s infinite;
+            }
+            @keyframes pulse {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex items-center mr-3">
+                        <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-green rounded-full"></span>
+                    </div>
+                    <a href="index.html" class="text-xl font-bold text-dark">心智障碍就业支持工具</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-600 hover:text-primary">首页</a>
+                    <a href="workflow-template.html" class="text-gray-600 hover:text-primary">任务卡模板</a>
+                    <a href="communication-tool.html" class="text-gray-600 hover:text-primary">沟通辅助</a>
+                    <a href="ai-assistant.html" class="text-primary font-bold">智能助手</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gray-50 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-comments text-4xl text-purple-600"></i>
+            </div>
+            <h1 class="text-3xl font-bold mb-2 text-gray-900">智能工作助手</h1>
+            <p class="text-lg text-gray-600">通过语音对话实现任务提醒，AI智能判断当前工作节点，提供个性化指导</p>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- 左侧：聊天界面 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- 聊天头部 -->
+                <div class="bg-primary text-white p-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fa fa-robot"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">工作助手</h3>
+                                <div class="flex items-center text-sm opacity-80">
+                                    <span class="status-indicator bg-green-400 mr-2"></span>
+                                    在线
+                                    <span id="voice-indicator" class="ml-3 flex items-center">
+                                        <i class="fa fa-volume-off mr-1"></i>
+                                        <span>语音播报</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="clear-chat" class="text-white/80 hover:text-white">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 聊天内容 -->
+                <div id="chat-container" class="h-80 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                    <!-- 欢迎消息 -->
+                    <div class="chat-bubble-assistant">
+                        <div class="flex items-start">
+                            <i class="fa fa-robot text-gray-500 mr-2 mt-1"></i>
+                            <div>
+                                <p class="font-bold text-gray-700">工作助手</p>
+                                <p>你好！我是你的智能工作助手。请问今天需要完成什么任务？</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 输入区域 -->
+                <div class="p-4 border-t">
+                    <div class="flex items-center gap-3">
+                        <button id="voice-btn" class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors" title="语音输入">
+                            <i class="fa fa-microphone text-xl"></i>
+                        </button>
+                        <input id="message-input" type="text" placeholder="输入消息或点击麦克风..." class="flex-1 px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:border-primary">
+                        <button id="send-btn" class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors" title="发送">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center mt-2">支持语音输入和文字输入</p>
+                </div>
+                
+                <!-- 语音状态 -->
+                <div id="voice-status" class="hidden bg-green-100 text-green-700 p-2 text-center text-sm">
+                    <i class="fa fa-microphone mr-2"></i>正在录音中...
+                </div>
+            </div>
+
+            <!-- 右侧：任务状态面板 -->
+            <div class="space-y-6">
+                <!-- 当前任务 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold flex items-center">
+                            <i class="fa fa-tasks text-primary mr-2"></i>当前任务
+                        </h3>
+                        <span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">超市理货员</span>
+                    </div>
+                    
+                    <!-- 任务进度环 -->
+                    <div class="flex justify-center mb-6">
+                        <div class="relative">
+                            <svg class="w-32 h-32 transform -rotate-90">
+                                <circle cx="64" cy="64" r="56" stroke="#E5E7EB" stroke-width="8" fill="none"/>
+                                <circle id="progress-ring" cx="64" cy="64" r="56" stroke="#3B82F6" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="280 352"/>
+                            </svg>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div id="progress-value" class="text-2xl font-bold text-primary">79%</div>
+                                    <div class="text-xs text-gray-500">完成度</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 任务步骤 -->
+                    <div class="space-y-3">
+                        <div data-task="1" class="step-card border-green-500 completed">
+                            <div class="flex items-center">
+                                <span class="step-number w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-3">1</span>
+                                <div>
+                                    <div class="font-bold">整理货架</div>
+                                    <div class="text-sm text-gray-500"><span class="status-text">已完成</span> · <span class="task-time">10:30</span></div>
+                                </div>
+                                <span class="status-icon ml-auto"><i class="fa fa-check-circle text-green-500"></i></span>
+                            </div>
+                        </div>
+                        
+                        <div data-task="2" class="step-card border-primary active">
+                            <div class="flex items-center">
+                                <span class="step-number w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center font-bold mr-3">2</span>
+                                <div>
+                                    <div class="font-bold">商品归位</div>
+                                    <div class="text-sm text-gray-500"><span class="status-text">进行中</span> · <span class="task-time">10:45</span></div>
+                                </div>
+                                <span class="status-icon ml-auto"><i class="fa fa-clock-o text-primary"></i></span>
+                            </div>
+                        </div>
+                        
+                        <div data-task="3" class="step-card border-gray-300">
+                            <div class="flex items-center">
+                                <span class="step-number w-8 h-8 bg-gray-300 text-white rounded-full flex items-center justify-center font-bold mr-3">3</span>
+                                <div>
+                                    <div class="font-bold">库存盘点</div>
+                                    <div class="text-sm text-gray-500"><span class="status-text">未开始</span></div>
+                                </div>
+                                <span class="status-icon ml-auto"></span>
+                            </div>
+                        </div>
+                        
+                        <div data-task="4" class="step-card border-gray-300">
+                            <div class="flex items-center">
+                                <span class="step-number w-8 h-8 bg-gray-300 text-white rounded-full flex items-center justify-center font-bold mr-3">4</span>
+                                <div>
+                                    <div class="font-bold">整理记录</div>
+                                    <div class="text-sm text-gray-500"><span class="status-text">未开始</span></div>
+                                </div>
+                                <span class="status-icon ml-auto"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 快捷指令 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold flex items-center mb-4">
+                        <i class="fa fa-lightbulb-o text-yellow-500 mr-2"></i>快捷指令
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button class="quick-command bg-green-50 hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg transition-colors">
+                            <i class="fa fa-check-circle mr-2"></i>完成当前
+                        </button>
+                        <button class="quick-command bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-lg transition-colors">
+                            <i class="fa fa-forward mr-2"></i>下一步
+                        </button>
+                        <button class="quick-command bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-4 py-3 rounded-lg transition-colors">
+                            <i class="fa fa-help-circle mr-2"></i>需要帮助
+                        </button>
+                        <button class="quick-command bg-red-50 hover:bg-red-100 text-red-700 px-4 py-3 rounded-lg transition-colors">
+                            <i class="fa fa-pause-circle mr-2"></i>休息一下
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI分析 -->
+                <div class="bg-gray-50 rounded-xl shadow-lg p-6 text-gray-900">
+                    <h3 class="text-lg font-bold flex items-center mb-3">
+                        <i class="fa fa-brain mr-2 text-purple-500"></i>AI智能分析
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">根据你的工作进度，我来帮你分析：</p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-center">
+                            <i class="fa fa-trending-up mr-2 text-green-500"></i>
+                            <span>当前效率：<span id="efficiency-value">85</span>%，<span id="efficiency-compare">比昨日快</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-target mr-2 text-blue-500"></i>
+                            <span>预计完成时间：<span id="estimated-time">11:30</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-coffee mr-2 text-orange-500"></i>
+                            <span>建议：<span id="suggestion">完成商品归位后休息5分钟</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能说明 -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-microphone text-primary text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">语音交互</h4>
+                <p class="text-sm text-gray-600">支持语音输入和语音播报，无需打字</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-brain text-secondary text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">AI智能</h4>
+                <p class="text-sm text-gray-600">自动识别任务节点，提供个性化指导</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="w-14 h-14 bg-warning/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-bar-chart text-warning text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">进度追踪</h4>
+                <p class="text-sm text-gray-600">实时显示任务完成进度和状态</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center">
+                <div class="w-14 h-14 bg-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-history text-purple text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">历史记录</h4>
+                <p class="text-sm text-gray-600">记录工作数据，支持复盘分析</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-8 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>智能工作助手 - 为心智障碍者提供智能化工作支持</p>
+            <p class="text-sm text-gray-400 mt-2">支持语音交互、AI分析、进度追踪</p>
+        </div>
+    </footer>
+
+    <script>
+        // 任务状态管理
+        const tasks = [
+            { id: 1, name: '整理货架', status: 'completed', time: '10:30' },
+            { id: 2, name: '商品归位', status: 'active', time: '10:45' },
+            { id: 3, name: '库存盘点', status: 'pending', time: '' },
+            { id: 4, name: '整理记录', status: 'pending', time: '' }
+        ];
+
+        // 计算进度
+        function calculateProgress() {
+            const completed = tasks.filter(t => t.status === 'completed').length;
+            const total = tasks.length;
+            return Math.round((completed / total) * 100);
+        }
+
+        // 更新进度环
+        function updateProgressRing() {
+            const progress = calculateProgress();
+            const circumference = 2 * Math.PI * 56;
+            
+            document.querySelector('#progress-ring')?.setAttribute('stroke-dasharray', `${progress / 100 * circumference} ${circumference}`);
+            document.querySelector('#progress-value').textContent = `${progress}%`;
+        }
+
+        // 更新步骤卡片
+        function updateStepCards() {
+            tasks.forEach((task, index) => {
+                const card = document.querySelector(`[data-task="${task.id}"]`);
+                if (!card) return;
+                
+                const statusIcon = card.querySelector('.status-icon');
+                const statusText = card.querySelector('.status-text');
+                const stepNumber = card.querySelector('.step-number');
+                
+                // 更新状态样式
+                card.classList.remove('completed', 'active', 'border-green-500', 'border-primary', 'border-gray-300');
+                if (stepNumber) {
+                    stepNumber.classList.remove('bg-green-500', 'bg-primary', 'bg-gray-300');
+                }
+                
+                if (task.status === 'completed') {
+                    card.classList.add('completed', 'border-green-500');
+                    if (stepNumber) stepNumber.classList.add('bg-green-500');
+                    statusIcon.innerHTML = '<i class="fa fa-check-circle text-green-500"></i>';
+                    statusText.textContent = '已完成';
+                } else if (task.status === 'active') {
+                    card.classList.add('active', 'border-primary');
+                    if (stepNumber) stepNumber.classList.add('bg-primary');
+                    statusIcon.innerHTML = '<i class="fa fa-clock-o text-primary"></i>';
+                    statusText.textContent = '进行中';
+                } else {
+                    card.classList.add('border-gray-300');
+                    if (stepNumber) stepNumber.classList.add('bg-gray-300');
+                    statusIcon.innerHTML = '';
+                    statusText.textContent = '未开始';
+                }
+                
+                // 更新时间显示
+                const timeEl = card.querySelector('.task-time');
+                if (timeEl) {
+                    if (task.time) {
+                        timeEl.textContent = task.time;
+                        timeEl.style.display = 'inline';
+                    } else {
+                        timeEl.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // 更新AI分析
+        function updateAIAnalysis() {
+            const progress = calculateProgress();
+            const completedTasks = tasks.filter(t => t.status === 'completed').length;
+            const activeTask = tasks.find(t => t.status === 'active');
+            const pendingTasks = tasks.filter(t => t.status === 'pending').length;
+            
+            const efficiency = Math.min(100, progress + Math.floor(Math.random() * 20));
+            const estimatedMinutes = pendingTasks * 15;
+            const now = new Date();
+            const estimatedTime = new Date(now.getTime() + estimatedMinutes * 60000);
+            
+            document.querySelector('#efficiency-value').textContent = efficiency + '%';
+            document.querySelector('#efficiency-compare').textContent = efficiency > 80 ? '比昨日快' : '与昨日持平';
+            document.querySelector('#estimated-time').textContent = estimatedTime.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            document.querySelector('#suggestion').textContent = activeTask ? `完成"${activeTask.name}"后休息5分钟` : '任务已全部完成！';
+        }
+
+        // 完成当前任务（只完成一个）
+        function completeCurrentTask() {
+            const currentIndex = tasks.findIndex(t => t.status === 'active');
+            if (currentIndex === -1) return { success: false, message: '没有正在进行的任务' };
+            
+            // 标记当前任务完成
+            tasks[currentIndex].status = 'completed';
+            tasks[currentIndex].time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            
+            // 标记下一个任务为进行中（如果有的话）
+            if (currentIndex + 1 < tasks.length) {
+                tasks[currentIndex + 1].status = 'active';
+                tasks[currentIndex + 1].time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            // 更新UI
+            updateProgressRing();
+            updateStepCards();
+            updateAIAnalysis();
+            
+            const nextTask = getNextTaskName();
+            const message = nextTask 
+                ? `太棒了！已完成当前步骤。现在进行下一步：${nextTask}。需要我说明怎么做吗？`
+                : '恭喜！所有任务都已完成！今天工作辛苦了！';
+            
+            return { success: true, message };
+        }
+
+        // 完成所有任务
+        function completeAllTasks() {
+            // 标记所有任务为完成
+            tasks.forEach((task, index) => {
+                if (task.status !== 'completed') {
+                    task.status = 'completed';
+                    task.time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+                }
+            });
+            
+            // 更新UI
+            updateProgressRing();
+            updateStepCards();
+            updateAIAnalysis();
+            
+            return '恭喜！所有任务都已完成！今天工作辛苦了！';
+        }
+
+        // 切换任务（重置当前任务为未开始）
+        function resetCurrentTask() {
+            const currentIndex = tasks.findIndex(t => t.status === 'active');
+            if (currentIndex === -1) {
+                // 如果没有进行中的任务，找到第一个未完成的任务
+                const firstPendingIndex = tasks.findIndex(t => t.status === 'pending');
+                if (firstPendingIndex === -1) {
+                    return { success: false, message: '所有任务都已完成，无法切换！' };
+                }
+                currentIndex = firstPendingIndex;
+            }
+            
+            // 将当前任务重置为未开始
+            tasks[currentIndex].status = 'pending';
+            tasks[currentIndex].time = '';
+            
+            // 找到第一个未完成的任务并设置为进行中
+            const firstPending = tasks.findIndex(t => t.status === 'pending');
+            if (firstPending !== -1) {
+                tasks[firstPending].status = 'active';
+                tasks[firstPending].time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            // 更新UI
+            updateProgressRing();
+            updateStepCards();
+            updateAIAnalysis();
+            
+            const currentTask = tasks.find(t => t.status === 'active');
+            return { success: true, message: currentTask 
+                ? `已切换任务！现在从"${currentTask.name}"开始。需要我说明怎么做吗？`
+                : '所有任务都已完成！' };
+        }
+
+        // 重置所有任务
+        function resetAllTasks() {
+            // 重置所有任务状态
+            tasks.forEach((task, index) => {
+                task.status = index === 0 ? 'active' : 'pending';
+                task.time = index === 0 ? new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }) : '';
+            });
+            
+            // 更新UI
+            updateProgressRing();
+            updateStepCards();
+            updateAIAnalysis();
+            
+            return `已重置所有任务！现在从"${tasks[0].name}"开始。需要我说明怎么做吗？`;
+        }
+
+        // 获取当前任务名称
+        function getCurrentTaskName() {
+            const active = tasks.find(t => t.status === 'active');
+            return active ? active.name : '所有任务';
+        }
+
+        // 获取下一个任务名称
+        function getNextTaskName() {
+            const activeIndex = tasks.findIndex(t => t.status === 'active');
+            if (activeIndex >= 0 && activeIndex + 1 < tasks.length) {
+                return tasks[activeIndex + 1].name;
+            }
+            return null;
+        }
+
+        // AI回复生成器
+        const aiResponses = {
+            '你好': '你好！我是你的智能工作助手，今天需要我帮你做什么？',
+            '开始工作': () => `好的！今天的任务是超市理货员工作。第一步是${tasks[0].name}，需要我详细说明吗？`,
+            '我完成了': handleCompleteCurrent,
+            '完成当前': handleCompleteCurrent,
+            '完成': handleCompleteAll,
+            '下一步': () => {
+                const nextTask = getNextTaskName();
+                if (nextTask) {
+                    return `好的！接下来是${nextTask}。请按照步骤操作，完成后告诉我。`;
+                }
+                return '所有任务都已完成！今天工作辛苦了！';
+            },
+            '需要帮助': () => {
+                const current = getCurrentTaskName();
+                return `别担心，我来帮你！当前步骤是${current}，需要我详细解释吗？`;
+            },
+            '休息一下': '好的，建议休息5分钟。需要我到时提醒你吗？',
+            '有什么任务': () => {
+                return tasks.map((t, i) => {
+                    const statusText = t.status === 'completed' ? '（已完成）' : t.status === 'active' ? '（进行中）' : '';
+                    return `${i + 1}.${t.name}${statusText}`;
+                }).join('，');
+            },
+            '任务状态': () => {
+                const progress = calculateProgress();
+                const completed = tasks.filter(t => t.status === 'completed').map(t => t.name).join('、');
+                const active = tasks.find(t => t.status === 'active')?.name || '';
+                const pending = tasks.filter(t => t.status === 'pending').map(t => t.name).join('、');
+                
+                let status = `当前任务进度：${progress}%。`;
+                if (completed) status += `已完成：${completed}；`;
+                if (active) status += `进行中：${active}；`;
+                if (pending) status += `待完成：${pending}。`;
+                
+                return status;
+            },
+            '今天做什么': '今天的任务是超市理货员工作，包括整理货架、商品归位、库存盘点和整理记录。',
+            '谢谢': '不客气！有任何问题随时问我。',
+            '切换任务': handleResetCurrent,
+            '重置任务': handleResetCurrent,
+            '重新开始': handleResetAll
+        };
+
+        // 处理完成当前任务命令
+        function handleCompleteCurrent() {
+            const result = completeCurrentTask();
+            return result.success ? result.message : result.message;
+        }
+
+        // 处理完成所有任务命令
+        function handleCompleteAll() {
+            return completeAllTasks();
+        }
+
+        // 处理切换任务命令
+        function handleResetCurrent() {
+            const result = resetCurrentTask();
+            return result.success ? result.message : result.message;
+        }
+
+        // 处理重置所有任务命令
+        function handleResetAll() {
+            return resetAllTasks();
+        }
+
+        // 获取元素
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+        const voiceBtn = document.getElementById('voice-btn');
+        const voiceStatus = document.getElementById('voice-status');
+        const clearChat = document.getElementById('clear-chat');
+        const quickCommands = document.querySelectorAll('.quick-command');
+
+        // 发送消息
+        function sendMessage(message) {
+            if (!message.trim()) return;
+            
+            // 添加用户消息
+            const userBubble = document.createElement('div');
+            userBubble.className = 'chat-bubble-user';
+            userBubble.innerHTML = `<p>${message}</p>`;
+            chatContainer.appendChild(userBubble);
+            
+            // 清空输入
+            messageInput.value = '';
+            
+            // 滚动到底部
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            // AI回复
+            setTimeout(() => {
+                let response = aiResponses[message];
+                if (typeof response === 'function') {
+                    response = response();
+                } else if (!response) {
+                    response = generateResponse(message);
+                }
+                
+                const assistantBubble = document.createElement('div');
+                assistantBubble.className = 'chat-bubble-assistant';
+                assistantBubble.innerHTML = `
+                    <div class="flex items-start">
+                        <i class="fa fa-robot text-gray-500 mr-2 mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-700">工作助手</p>
+                            <p>${response}</p>
+                        </div>
+                    </div>
+                `;
+                chatContainer.appendChild(assistantBubble);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                
+                // 语音播报
+                speak(response);
+            }, 800);
+        }
+
+        // 生成AI回复
+        function generateResponse(message) {
+            if (message.includes('完成') || message.includes('做完了')) {
+                const wasCompleted = completeCurrentTask();
+                if (wasCompleted) {
+                    const nextTask = getNextTaskName();
+                    if (nextTask) {
+                        return `太好了！已完成当前步骤。接下来需要进行${nextTask}，需要我详细说明吗？`;
+                    }
+                    return '恭喜！所有任务都已完成！';
+                }
+                return '所有任务都已经完成了！';
+            }
+            if (message.includes('下一步') || message.includes('接下来')) {
+                const nextTask = getNextTaskName();
+                if (nextTask) {
+                    return `当前任务是${getCurrentTaskName()}，请继续完成。完成后告诉我。`;
+                }
+                return '所有任务都已完成！';
+            }
+            if (message.includes('帮助') || message.includes('怎么做')) {
+                return `当然可以！当前步骤是${getCurrentTaskName()}：1.检查当前任务 2.按照流程操作 3.完成后告知我。`;
+            }
+            if (message.includes('进度') || message.includes('状态')) {
+                const progress = calculateProgress();
+                return `当前任务进度${progress}%。${tasks.map(t => `${t.name}(${t.status === 'completed' ? '已完成' : t.status === 'active' ? '进行中' : '未开始'})`).join('、')}。`;
+            }
+            return `我理解你说的："${message}"。当前正在进行${getCurrentTaskName()}步骤，需要我帮助你吗？`;
+        }
+
+        // 语音播报
+        function speak(text) {
+            // 停止之前的语音
+            if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+                window.speechSynthesis.cancel();
+            }
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'zh-CN';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                
+                // 尝试获取中文语音
+                const voices = window.speechSynthesis.getVoices();
+                const chineseVoice = voices.find(voice => 
+                    voice.lang.startsWith('zh') || voice.lang.startsWith('zh-CN')
+                ) || voices.find(voice => voice.name.includes('Chinese') || voice.name.includes('Zh'));
+                
+                if (chineseVoice) {
+                    utterance.voice = chineseVoice;
+                }
+                
+                utterance.onstart = function() {
+                    document.querySelector('#voice-indicator')?.classList.add('active');
+                };
+                
+                utterance.onend = function() {
+                    document.querySelector('#voice-indicator')?.classList.remove('active');
+                };
+                
+                utterance.onerror = function(event) {
+                    console.error('语音合成错误:', event.error);
+                    document.querySelector('#voice-indicator')?.classList.remove('active');
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.log('您的浏览器不支持语音合成功能');
+            }
+        }
+
+        // 预加载语音
+        function preloadVoices() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.getVoices();
+                
+                window.speechSynthesis.onvoiceschanged = function() {
+                    window.speechSynthesis.getVoices();
+                };
+            }
+        }
+        
+        // 页面加载时预加载语音
+        preloadVoices();
+
+        // 事件监听
+        sendBtn.addEventListener('click', () => sendMessage(messageInput.value));
+        
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage(messageInput.value);
+        });
+
+        // 语音输入模拟
+        voiceBtn.addEventListener('mousedown', () => {
+            voiceStatus.classList.remove('hidden');
+        });
+        
+        voiceBtn.addEventListener('mouseup', () => {
+            voiceStatus.classList.add('hidden');
+            const voiceMessages = ['我完成了', '下一步', '需要帮助', '任务状态', '开始工作'];
+            const randomMessage = voiceMessages[Math.floor(Math.random() * voiceMessages.length)];
+            messageInput.value = randomMessage;
+            sendMessage(randomMessage);
+        });
+
+        // 快捷指令
+        quickCommands.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const command = btn.textContent.trim().replace(/\s+/g, '');
+                const commandMap = {
+                    '完成当前': '完成当前',
+                    '下一步': '下一步',
+                    '需要帮助': '需要帮助',
+                    '休息一下': '休息一下'
+                };
+                sendMessage(commandMap[command] || command);
+            });
+        });
+
+        // 清空聊天
+        clearChat.addEventListener('click', () => {
+            chatContainer.innerHTML = `
+                <div class="chat-bubble-assistant">
+                    <div class="flex items-start">
+                        <i class="fa fa-robot text-gray-500 mr-2 mt-1"></i>
+                        <div>
+                            <p class="font-bold text-gray-700">工作助手</p>
+                            <p>你好！我是你的智能工作助手。请问今天需要完成什么任务？</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgressRing();
+            updateStepCards();
+            updateAIAnalysis();
+        });
+    </script>
+</body>
+</html>

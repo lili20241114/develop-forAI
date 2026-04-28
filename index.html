@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心智障碍群体工作现场支持工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        purple: '#8B5CF6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937',
+                        red: '#EF4444',
+                        yellow: '#F59E0B',
+                        green: '#10B981'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .feature-card {
+                @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+            }
+            .feature-icon {
+                @apply w-16 h-16 rounded-full flex items-center justify-center text-white text-2xl mb-4;
+            }
+            .btn-primary {
+                @apply bg-primary hover:bg-blue-600 text-white px-6 py-3 rounded-md font-bold transition-all duration-300;
+            }
+            .btn-secondary {
+                @apply bg-white hover:bg-gray-100 text-primary border border-primary px-6 py-3 rounded-md font-bold transition-all duration-300;
+            }
+            .status-dot {
+                @apply w-4 h-4 rounded-full inline-block mr-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex items-center">
+                        <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                        <span class="w-3 h-3 bg-green rounded-full mr-2"></span>
+                    </div>
+                    <h1 class="text-xl font-bold text-dark">心智障碍就业支持工具</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#features" class="text-gray-600 hover:text-primary">核心功能</a>
+                    <a href="#tools" class="text-gray-600 hover:text-primary">工具模块</a>
+                    <a href="#job-roles" class="text-gray-600 hover:text-primary">岗位方案</a>
+                    <a href="#support-system" class="text-gray-600 hover:text-primary">支持体系</a>
+                    <a href="#guide" class="text-gray-600 hover:text-primary">使用指南</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-gradient-to-r from-primary to-blue-700 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-4">
+                <div class="flex items-center">
+                    <span class="status-dot bg-red"></span>
+                    <span class="status-dot bg-yellow"></span>
+                    <span class="status-dot bg-green"></span>
+                </div>
+            </div>
+            <h2 class="text-4xl font-bold mb-4">心智障碍群体工作现场支持工具</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">为孤独症谱系障碍、智力发育迟缓、唐氏综合征、脑瘫伴随智力障碍等心智障碍者提供可落地的工作现场支持工具，覆盖工作流程拆解、沟通辅助、环境适应三大核心需求。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#tools" class="btn-primary flex items-center justify-center">
+                    <i class="fa fa-list-ol mr-2"></i>探索工具
+                </a>
+                <a href="#guide" class="btn-secondary flex items-center justify-center">
+                    <i class="fa fa-question-circle mr-2"></i>了解更多
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 现实挑战 -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-8">核心挑战与有效策略</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-red-600 flex items-center">
+                        <i class="fa fa-exclamation-circle mr-2"></i>现实挑战
+                    </h4>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="py-2 text-left">挑战类型</th>
+                                    <th class="py-2 text-left">影响</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-2"><strong>表达困难</strong></td>
+                                    <td class="py-2 text-gray-600">难以清晰表达需求、情绪、身体状况</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2"><strong>理解困难</strong></td>
+                                    <td class="py-2 text-gray-600">对抽象指令、多步骤流程理解能力有限</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2"><strong>执行困难</strong></td>
+                                    <td class="py-2 text-gray-600">多步任务记忆与执行易中断</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-green-600 flex items-center">
+                        <i class="fa fa-lightbulb-o mr-2"></i>有效策略
+                    </h4>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span><strong>视觉提示替代文字</strong>：心智障碍者对图像的识别和记忆优于文字</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span><strong>"灯塔式"渐进引导</strong>：用颜色/图标清晰标注进度状态</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span><strong>步骤可视化拆分</strong>：将复杂任务分解为3-5个可独立完成的子步骤</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span><strong>多感官反馈</strong>：语音+触觉+视觉三重确认，强化任务记忆</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 能力分级参考 -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-8">能力分级参考</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+                    <div class="flex items-center mb-4">
+                        <span class="status-dot bg-green"></span>
+                        <span class="font-bold">轻度支持</span>
+                    </div>
+                    <p class="text-gray-600">基本语言沟通，可执行5步以内任务，需偶尔提醒</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+                    <div class="flex items-center mb-4">
+                        <span class="status-dot bg-yellow"></span>
+                        <span class="font-bold">中度支持</span>
+                    </div>
+                    <p class="text-gray-600">沟通需辅助，可执行3步任务，需定期确认</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+                    <div class="flex items-center mb-4">
+                        <span class="status-dot bg-red"></span>
+                        <span class="font-bold">高度支持</span>
+                    </div>
+                    <p class="text-gray-600">非语言或有限语言，需全程引导，支持刻板行为优势</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能特点 -->
+    <section id="features" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">三大核心功能</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon bg-primary">
+                        <i class="fa fa-list-ol"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">工作流程拆解</h3>
+                    <p class="text-gray-600">将复杂工作任务分解为3-5个可理解的步骤，使用红-黄-绿颜色编码表示"待办-进行-完成"状态。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon bg-secondary">
+                        <i class="fa fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">沟通辅助</h3>
+                    <p class="text-gray-600">提供情绪与需求表达卡、语音转文字辅助，帮助心智障碍者表达基本需求和情绪。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon bg-warning">
+                        <i class="fa fa-map"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">环境适应</h3>
+                    <p class="text-gray-600">时间可视化工具、进度追踪器，帮助心智障碍者适应工作环境和时间管理。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 工具模块导航 -->
+    <section id="tools" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">工具模块</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 视觉任务卡系统 -->
+                <a href="workflow-template.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-primary mr-4">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">视觉任务卡系统</h3>
+                            <p class="text-gray-600 mb-4">三步灯塔式引导，红-黄-绿颜色编码表示状态，将工作流程转化为图像+简单文字的任务卡。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看模板</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 步骤进度追踪器 -->
+                <a href="workflow-examples.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-secondary mr-4">
+                            <i class="fa fa-tasks"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">步骤进度追踪器</h3>
+                            <p class="text-gray-600 mb-4">三色进度环实时显示任务完成度，视觉进度指示可使任务中断率降低68%。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看示例</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 情绪与需求表达卡 -->
+                <a href="communication-tool.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-purple-500 mr-4">
+                            <i class="fa fa-smile-o"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">情绪与需求表达卡</h3>
+                            <p class="text-gray-600 mb-4">图像化沟通卡帮助表达基本需求和情绪，减少焦虑和挫败感。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看工具</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 低成本方案 -->
+                <a href="low-cost-solution.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-warning mr-4">
+                            <i class="fa fa-pencil"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">低成本纸质方案</h3>
+                            <p class="text-gray-600 mb-4">打印塑封任务卡、颜色磁钉板、实体定时器，成本100-200元/人。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看方案</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 数字化方案 -->
+                <a href="digital-solution.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-danger mr-4">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">数字化方案</h3>
+                            <p class="text-gray-600 mb-4">视觉日程APP、语音交互设备、进度追踪系统，支持数据记录和个性化适配。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看应用</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 智能工作助手 -->
+                <a href="ai-assistant.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-purple-500 mr-4">
+                            <i class="fa fa-comments"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">智能工作助手</h3>
+                            <p class="text-gray-600 mb-4">AI驱动的语音交互助手，支持任务提醒、步骤指导和进度追踪。</p>
+                            <div class="flex items-center text-primary">
+                                <span>开始体验</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- 岗位匹配工具 -->
+                <a href="job-classification.html" class="feature-card block">
+                    <div class="flex items-start">
+                        <div class="feature-icon bg-green-600 mr-4">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">岗位分类支持方案</h3>
+                            <p class="text-gray-600 mb-4">针对超市理货员、餐饮服务、数据标注员等岗位提供定制化支持方案。</p>
+                            <div class="flex items-center text-primary">
+                                <span>查看方案</span>
+                                <i class="fa fa-arrow-right ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 岗位方案预览 -->
+    <section id="job-roles" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">分岗位设计方案</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 超市理货员 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-xl font-bold">超市理货员</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">核心任务</h4>
+                            <p class="text-gray-600 text-sm">货架整理、商品归位、库存盘点</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">优势契合</h4>
+                            <p class="text-gray-600 text-sm">刻板行为（喜欢整齐）→ 喜欢重复性整理工作</p>
+                        </div>
+                        <a href="job-classification.html#supermarket" class="text-primary flex items-center text-sm">
+                            <span>查看详细方案</span>
+                            <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 餐饮服务 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-secondary text-white p-4">
+                        <h3 class="text-xl font-bold">餐饮服务</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">核心任务</h4>
+                            <p class="text-gray-600 text-sm">食材备料、碗碟清洗、简单摆盘</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">优势契合</h4>
+                            <p class="text-gray-600 text-sm">喜欢重复性动作、注重清洁</p>
+                        </div>
+                        <a href="job-classification.html#food-service" class="text-primary flex items-center text-sm">
+                            <span>查看详细方案</span>
+                            <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 数据标注员 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-orange-500 p-4">
+                        <h3 class="text-xl font-bold text-white">数据标注员</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">核心任务</h4>
+                            <p class="text-gray-600 text-sm">图像框选、分类标注、内容校验</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="font-bold mb-2">优势契合</h4>
+                            <p class="text-gray-600 text-sm">注重细节、遵循规则、耐心重复</p>
+                        </div>
+                        <a href="job-classification.html#data-labeling" class="text-primary flex items-center text-sm">
+                            <span>查看详细方案</span>
+                            <i class="fa fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持体系 -->
+    <section id="support-system" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">配套支持体系</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <div class="feature-icon bg-primary">
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">就业辅导员</h3>
+                    <p class="text-gray-600">支持性就业的关键角色，负责入职前评估、个性化支持计划制定、岗前培训和渐退式支持。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon bg-secondary">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">自然支持体系</h3>
+                    <p class="text-gray-600">鼓励普通同事成为自然支持者，提供工作引导、社交融入、情绪关注和环境稳定支持。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon bg-warning">
+                        <i class="fa fa-home"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">家庭参与机制</h3>
+                    <p class="text-gray-600">通过APP推送工作表现、问题反馈、技能迁移指导和庆贺参与，建立家校合作。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用指南 -->
+    <section id="guide" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">实施步骤</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <ol class="space-y-6">
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg">评估阶段</h4>
+                                <p class="text-gray-600">对心智障碍员工进行能力评估，参照职业能力测评表确定能力层级。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg">匹配阶段</h4>
+                                <p class="text-gray-600">根据评估结果匹配岗位和工具配置，选择低成本或数字化方案。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-warning text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">3</div>
+                            <div>
+                                <h4 class="font-bold text-lg">培训阶段</h4>
+                                <p class="text-gray-600">对员工、辅导员、同事进行工具使用培训，确保掌握正确使用方法。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-danger text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">4</div>
+                            <div>
+                                <h4 class="font-bold text-lg">试运行阶段</h4>
+                                <p class="text-gray-600">前2周密集支持，观察效果并收集反馈。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">5</div>
+                            <div>
+                                <h4 class="font-bold text-lg">调整阶段</h4>
+                                <p class="text-gray-600">根据反馈优化工具配置，确保最佳支持效果。</p>
+                            </div>
+                        </li>
+                        <li class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl mr-4">6</div>
+                            <div>
+                                <h4 class="font-bold text-lg">稳定阶段</h4>
+                                <p class="text-gray-600">渐退辅导员支持，建立自然支持网络，实现独立工作。</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成本对比 -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">成本可行性对比</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-600">低成本方案（纸质/基础设备）</h3>
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="py-2 text-left">工具类型</th>
+                                <th class="py-2 text-left">单件成本</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2">任务卡</td>
+                                <td class="py-2 text-gray-600">5-10元/张</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">沟通需求卡</td>
+                                <td class="py-2 text-gray-600">20-50元/套</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">颜色磁钉板</td>
+                                <td class="py-2 text-gray-600">15-30元/个</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">实体定时器</td>
+                                <td class="py-2 text-gray-600">30-50元/个</td>
+                            </tr>
+                            <tr class="border-t font-bold">
+                                <td class="py-2">合计（基础配置）</td>
+                                <td class="py-2 text-gray-600">100-200元/人</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4 p-3 bg-green-50 rounded">
+                        <p class="text-sm text-green-700"><strong>优势：</strong>成本低、可立即实施、无需培训</p>
+                        <p class="text-sm text-red-700 mt-1"><strong>局限：</strong>更新需重新打印、无法自动记录数据</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">数字化方案（技术赋能）</h3>
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="py-2 text-left">工具类型</th>
+                                <th class="py-2 text-left">成本</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2">通用平板</td>
+                                <td class="py-2 text-gray-600">500-1000元/台</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">视觉日程APP</td>
+                                <td class="py-2 text-gray-600">免费~100元/年</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">定制标注系统</td>
+                                <td class="py-2 text-gray-600">5000-20000元/套</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">语音交互设备</td>
+                                <td class="py-2 text-gray-600">300-800元/个</td>
+                            </tr>
+                            <tr class="border-t font-bold">
+                                <td class="py-2">合计</td>
+                                <td class="py-2 text-gray-600">1000-25000元/人</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4 p-3 bg-blue-50 rounded">
+                        <p class="text-sm text-blue-700"><strong>优势：</strong>数据追踪、个性化适配、远程支持</p>
+                        <p class="text-sm text-red-700 mt-1"><strong>局限：</strong>需培训、依赖设备维护</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <div class="flex items-center mr-3">
+                            <span class="w-3 h-3 bg-red rounded-full mr-1"></span>
+                            <span class="w-3 h-3 bg-yellow rounded-full mr-1"></span>
+                            <span class="w-3 h-3 bg-green rounded-full"></span>
+                        </div>
+                        <h2 class="text-xl font-bold">心智障碍就业支持工具</h2>
+                    </div>
+                    <p class="text-gray-400 mt-2">帮助心智障碍者更好地适应工作环境</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-question-circle text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-envelope text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-share-alt text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; 2026 心智障碍就业支持工具 - 为心智障碍者提供工作支持</p>
+                <p class="text-sm mt-2">参考资料：《心智障碍者融合就业用人单位操作指引》、北京如常集团实践经验</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

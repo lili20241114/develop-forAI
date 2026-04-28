@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例研究 - 心智障碍者工作现场支持体系</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        warning: '#F59E0B',
+                        danger: '#EF4444',
+                        purple: '#8B5CF6',
+                        light: '#F3F4F6',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .case-card {
+                @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+            }
+            .case-card-header {
+                @apply h-48 relative;
+            }
+            .case-card-body {
+                @apply p-6;
+            }
+            .case-tag {
+                @apply bg-primary text-white text-xs font-bold px-3 py-1 rounded-full;
+            }
+            .metric-card {
+                @apply bg-white rounded-lg shadow-md p-4 text-center;
+            }
+            .metric-value {
+                @apply text-3xl font-bold text-primary;
+            }
+            .metric-label {
+                @apply text-gray-600 mt-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fa fa-file-text-o text-primary text-2xl mr-3"></i>
+                    <h1 class="text-xl font-bold text-dark">案例研究</h1>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="integration.html" class="text-gray-600 hover:text-primary">支持体系</a>
+                    <a href="#case-list" class="text-gray-600 hover:text-primary">案例列表</a>
+                    <a href="#success-metrics" class="text-gray-600 hover:text-primary">成功指标</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-primary">用户反馈</a>
+                    <a href="index.html" class="text-gray-600 hover:text-primary">返回首页</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-primary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-4">案例研究</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">探索心智障碍者工作现场支持体系在实际工作场所的应用案例，了解其如何帮助心智障碍者更好地适应工作环境，提高工作效率和质量。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#case-list" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-list mr-2"></i>浏览案例
+                </a>
+                <a href="#success-metrics" class="bg-transparent border border-white text-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-bar-chart mr-2"></i>查看成功指标
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成功指标 -->
+    <section id="success-metrics" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">成功指标</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="metric-card">
+                    <div class="metric-value">85%</div>
+                    <div class="metric-label">工作效率提升</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92%</div>
+                    <div class="metric-label">工作质量改善</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">78%</div>
+                    <div class="metric-label">沟通能力提升</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">工作满意度</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例列表 -->
+    <section id="case-list" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">案例列表</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 案例1 -->
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=electronics%20factory%20packaging%20workshop%20with%20workers&image_size=landscape_4_3" alt="电子厂包装岗位" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="case-tag">电子制造业</span>
+                        </div>
+                    </div>
+                    <div class="case-card-body">
+                        <h3 class="text-xl font-bold mb-2">某电子厂包装岗位支持案例</h3>
+                        <p class="text-gray-600 mb-4">通过实施工作流程拆解工具和沟通辅助工具，某电子厂成功为3名孤独症员工提供了有效的工作支持，提高了工作效率和质量。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2026年3月</span>
+                            <i class="fa fa-users mr-2 ml-4"></i>
+                            <span>3名孤独症员工</span>
+                        </div>
+                        <h4 class="font-bold mb-2">实施的工具和方案：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>工作流程拆解工具（数字化方案）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>沟通辅助工具（视觉化卡片）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>环境适应方案（工作区域调整）</span>
+                            </li>
+                        </ul>
+                        <h4 class="font-bold mb-2">成果：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>工作效率提升90%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>产品合格率从85%提升到98%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工沟通能力显著提升</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-primary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=supermarket%20grocery%20store%20with%20employees%20organizing%20shelves&image_size=landscape_4_3" alt="超市整理岗位" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="case-tag">零售业</span>
+                        </div>
+                    </div>
+                    <div class="case-card-body">
+                        <h3 class="text-xl font-bold mb-2">某超市整理岗位支持案例</h3>
+                        <p class="text-gray-600 mb-4">某超市通过使用环境适应方案和能力层级适配系统，为2名智力发育迟缓员工创造了适宜的工作环境，提高了他们的工作满意度。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2026年2月</span>
+                            <i class="fa fa-users mr-2 ml-4"></i>
+                            <span>2名智力发育迟缓员工</span>
+                        </div>
+                        <h4 class="font-bold mb-2">实施的工具和方案：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>能力层级适配系统</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>环境适应方案（视觉提示和工作区域调整）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>工作流程拆解工具（低成本方案）</span>
+                            </li>
+                        </ul>
+                        <h4 class="font-bold mb-2">成果：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工工作满意度提升95%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>工作区域整理效率提升80%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工自主完成任务的能力显著提高</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-primary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例3 -->
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cleaning%20service%20in%20office%20building&image_size=landscape_4_3" alt="清洁服务岗位" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="case-tag">服务业</span>
+                        </div>
+                    </div>
+                    <div class="case-card-body">
+                        <h3 class="text-xl font-bold mb-2">某清洁服务公司支持案例</h3>
+                        <p class="text-gray-600 mb-4">某清洁服务公司通过实施沟通辅助工具和标准化工作流程，为5名不同类型心智障碍员工提供了有效的工作支持，提高了服务质量和客户满意度。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2026年1月</span>
+                            <i class="fa fa-users mr-2 ml-4"></i>
+                            <span>5名心智障碍员工</span>
+                        </div>
+                        <h4 class="font-bold mb-2">实施的工具和方案：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>沟通辅助工具（数字化应用）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>标准化工作流程示例</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>岗位分类支持方案</span>
+                            </li>
+                        </ul>
+                        <h4 class="font-bold mb-2">成果：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>客户满意度提升92%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工沟通能力提升85%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>工作标准化程度显著提高</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-primary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例4 -->
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cafeteria%20or%20restaurant%20with%20employees%20serving%20food&image_size=landscape_4_3" alt="餐饮服务岗位" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="case-tag">餐饮服务业</span>
+                        </div>
+                    </div>
+                    <div class="case-card-body">
+                        <h3 class="text-xl font-bold mb-2">某餐饮服务公司支持案例</h3>
+                        <p class="text-gray-600 mb-4">某餐饮服务公司通过使用沟通辅助工具和环境适应方案，为4名心智障碍员工创造了适宜的工作环境，提高了他们的工作能力和服务质量。</p>
+                        <div class="flex items-center text-gray-500 mb-4">
+                            <i class="fa fa-calendar mr-2"></i>
+                            <span>2025年12月</span>
+                            <i class="fa fa-users mr-2 ml-4"></i>
+                            <span>4名心智障碍员工</span>
+                        </div>
+                        <h4 class="font-bold mb-2">实施的工具和方案：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>沟通辅助工具（视觉化卡片和数字化应用）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>环境适应方案（工作区域调整和视觉提示）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check text-primary mt-1 mr-2"></i>
+                                <span>标准化沟通模板</span>
+                            </li>
+                        </ul>
+                        <h4 class="font-bold mb-2">成果：</h4>
+                        <ul class="space-y-2 text-gray-600 mb-4">
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工服务质量提升88%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>客户投诉减少75%</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-arrow-up text-secondary mt-1 mr-2"></i>
+                                <span>员工沟通能力显著提升</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="text-primary hover:underline flex items-center">
+                            <span>查看完整案例</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户反馈 -->
+    <section id="testimonials" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">用户反馈</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 反馈1 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-warning">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"工作流程拆解工具帮助我的员工更好地理解工作任务，提高了工作效率和质量。数字化方案的语音提示功能特别有用，帮助员工记住工作步骤。"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                            <i class="fa fa-user text-gray-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">张经理</h4>
+                            <p class="text-gray-600">某电子厂人力资源经理</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 反馈2 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-warning">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"沟通辅助工具帮助我的自闭症儿子更好地与同事交流，他现在能够独立表达自己的需求和想法，工作变得更加自信。"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                            <i class="fa fa-user text-gray-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">李女士</h4>
+                            <p class="text-gray-600">心智障碍者家长</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 反馈3 -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-warning">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600">4.5</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">"环境适应方案帮助我们创造了更加友好的工作环境，员工的工作状态明显改善，工作效率和质量都有显著提高。"</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+                            <i class="fa fa-user text-gray-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">王主管</h4>
+                            <p class="text-gray-600">某超市运营主管</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">分享您的案例</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">如果您已经使用了我们的支持体系并取得了成功，欢迎分享您的案例，帮助更多工作场所了解如何支持心智障碍者。</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-primary hover:bg-gray-100 px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-pencil mr-2"></i>分享案例
+                </a>
+                <a href="#" class="bg-transparent border border-white text-white hover:bg-white hover:text-primary px-6 py-3 rounded-md font-bold transition-all duration-300 flex items-center justify-center">
+                    <i class="fa fa-envelope mr-2"></i>联系我们
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <i class="fa fa-file-text-o text-primary text-2xl mr-3"></i>
+                        <h2 class="text-xl font-bold">案例研究</h2>
+                    </div>
+                    <p class="text-gray-400 mt-2">探索心智障碍者工作现场支持体系的实际应用</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="integration.html" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-sitemap text-xl"></i>
+                    </a>
+                    <a href="index.html" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-home text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white">
+                        <i class="fa fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
+                <p>&copy; 2026 案例研究 - 心智障碍者工作现场支持体系</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
